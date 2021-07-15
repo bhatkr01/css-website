@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Luther CSS</title>
+    </head>
+    <body>
+        <a href="{%url 'roster' %}">Roster</a>
+        <a href="{%url 'event_signup' %}">Event SignUp</a>
+        or 
+        <a href="{%url 'signup' %}">Signup</a>
+        <a href="{%url 'login' %}">Login</a>
+        <a href="{%url 'event_calendar' %}">Event Calendar</a>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
