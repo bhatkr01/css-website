@@ -1,17 +1,79 @@
-{% load static %}
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Luther CSS</title>
-    </head>
-    <body>
-        <a href="{%url 'roster' %}">Roster</a>
-        <a href="{%url 'event_signup' %}">Event SignUp</a>
-        or 
-        <a href="{%url 'signup' %}">Signup</a>
-        <a href="{%url 'login' %}">Login</a>
-        <a href="{%url 'event_calendar' %}">Event Calendar</a>
-        {% block content %}
+<html lang="en">
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+    <a class="navbar-brand" href="{%url 'backend:index' %}">LUTHER CSS</a>
+    <ul class="nav navbar-nav">
+        <li><a href="{%url 'backend:index' %}">Home</a></li>
+        <li><a href="{%url 'backend:about' %}">About</a></li>
+        <li><a href="{%url 'backend:roster' %}">Roster</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{%url 'backend:event_calendar' %}">Event Calendar</a></li>
+        {% endif %}
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        {% if user.is_admin %}
+        <li><a href="{%url 'backend:createpost' %}">New Post</a></li>
+        {% endif %}
+        {% if not user.is_authenticated %}
+        <li><a href="{% url 'accounts:sign_up' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="{%url 'accounts:log_in' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <li><a href="{%url 'accounts:profile' %}"><span class="glyphicon glyphicon-user"></span></a></li>
+        <li><a href="{%url 'accounts:log_out' %}">Logout</a></li>
+        {% endif %}
+    </ul>
+
+    <div class="post_container overflow-auto">
+
+        {%block content %}
         {% endblock %}
-    </body>
+    </div>
+
+  <footer id="footer">
+
+        © 2020 Copyright:Luther CSS
+
+  
+  </footer>
+</div>
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+      
+
+

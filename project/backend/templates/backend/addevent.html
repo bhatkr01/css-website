@@ -1,7 +1,12 @@
 {%extends 'backend/base.html' %}
 
 {% block content %}
-    <form action="{% url 'accounts:sign_up' %}" method="POST">
+
+<div >
+    <a href="{'% url 'backend:event_calendar' %}"> Calendar </a>
+  </div>
+
+    <form action="{% url 'backend:addevent' %}" method="POST">
       {% csrf_token %}
       <table>
       {{ form.as_table }}
