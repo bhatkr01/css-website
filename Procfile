@@ -1,1 +1,1 @@
-web: gunicorn css_website.wsgi:application --python PROJECT --log-file - --log-level debug --preload --workers 1
+web: gunicorn --pythonpath comp_sci_soc PROJECT css_website.wsgi
