@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath PROJECT css_website.wsgi
+web: gunicorn --pythonpath PROJECT css_website.wsgi --log-file -
