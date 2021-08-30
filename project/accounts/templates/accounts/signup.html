@@ -1,11 +1,9 @@
 {%extends 'backend/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <form action="{% url 'accounts:sign_up' %}" method="POST">
       {% csrf_token %}
-      <table>
-      {{ form.as_table }}
-      </table>
-      <input type="submit" value="Submit">
+        {% crispy form %}
     </form>
 {%endblock%}

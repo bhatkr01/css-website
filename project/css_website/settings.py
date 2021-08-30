@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK='bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,11 +87,6 @@ DATABASES = {
     'default': {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'd26j92qlt5najf',
-        # 'USER': 'kmjvdhspgkpmaw',
-        # 'PASSWORD': 'ef9581c5cf340ce1af04ada7d9110eac26bf441ace43dc0e6c5d260466c07feb',
-        # 'HOST': "ec2-52-86-2-228.compute-1.amazonaws.com",
-        # 'PORT': 5432,
         'NAME': os.getenv("Name"),
         'USER': os.getenv("User"),
         'PASSWORD': os.getenv("Password"),
