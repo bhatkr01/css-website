@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Post, Event
 from accounts.models import MyUser
@@ -30,6 +32,7 @@ def roster(request):
 def event_signup(request):
    pass
 
+@login_required(login_url='accounts/login/')
 def createpost(request):
     if request.method=='POST':
         form=PostForm(request.POST)
@@ -40,6 +43,28 @@ def createpost(request):
         form=PostForm()
     return render(request, 'backend/newpost.html', {'form':form})
 
+@login_required(login_url='accounts/login/')
+def postdetail(request, id):
+    context={
+        'post':Post.objects.get(id=id)
+    }
+    return render(request, 'backend/postdetail.html', context)
+
+@login_required(login_url='accounts/login/')
+def editpost(request, id):
+    post=get_object_or_404(Post,id=id)
+    form=PostForm(request.POST or None, instance=post)
+
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('backend:postdetail', kwargs={"id":id}))
+    return render(request, 'backend/editpost.html', {'form':form})
+
+@login_required(login_url='accounts/login/')
+def deletepost(request, id):
+    post=get_object_or_404(Post,id=id)
+    post.delete()
+    return render(request, 'backend/index.html')
 
 def about(request):
    return render(request, 'backend/about.html')
@@ -90,3 +115,26 @@ def addevent(request):
     else:
         form=EventForm()
     return render(request, 'backend/addevent.html', {'form':form})
+
+@login_required(login_url='accounts/login/')
+def eventdetail(request, id):
+    context={
+        'event':Event.objects.get(id=id)
+    }
+    return render(request, 'backend/eventdetail.html', context)
+
+@login_required(login_url='accounts/login/')
+def editevent(request, id):
+    event=get_object_or_404(Event,id=id)
+    form=EventForm(request.POST or None, instance=event)
+
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('backend:eventdetail', kwargs={"id":id}))
+    return render(request, 'backend/editevent.html', {'form':form})
+
+@login_required(login_url='accounts/login/')
+def deleteevent(request, id):
+    event=get_object_or_404(Event,id=id)
+    event.delete()
+    return render(request, 'backend/event_calendar.html')

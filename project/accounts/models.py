@@ -21,6 +21,7 @@ class MyUserManager(BaseUserManager):
             first_name=first_name,
             last_name=last_name,
             year=year,
+            password=password
         )
 
         user.set_password(password)

@@ -12,7 +12,7 @@ class Calendar(HTMLCalendar):
 		events=events.filter(start_time__day=day)
 		d=""
 		for event in events:
-			d+=f'<li>{event.event_title}</li>'
+			d+=f'<li> <a href= "/eventdetail/{event.id}">{event.event_title}</a></li>'
 		if day!=0:
 			return f"<td><span class='date'>{day}</span><ul>{d}</ul></td>"
 		return "<td></td>"
@@ -29,4 +29,5 @@ class Calendar(HTMLCalendar):
 		cal += f'{self.formatweekheader()}\n'
 		for week in self.monthdays2calendar(self.year, self.month):
 			cal += f'{self.formatweek(week, events)}\n'
+		cal+=f'</table>'
 		return cal

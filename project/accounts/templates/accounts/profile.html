@@ -1,11 +1,11 @@
-{%extends 'backend/base.html' %}
+{% extends 'backend/base.html' %}
+{% block title %}{{user.first_name}}:Profile {% endblock %}
 
 {% block content %}
 
 
 
-
-        {% if posts %}
+{% if posts %}
             {% for post in posts %}
 
 
@@ -20,11 +20,16 @@
                   <p class="card-text">{{post.post_content}}</p>
                 </div>
               </div>
+              <li><a href="{% url 'accounts:editaccount' user.id %}">Edit Account</a>
+                <li> <a href="{% url 'accounts:deleteaccount' user.id %}">Delete Account</a></li> 
             {% endfor %}
+          
 
 
         {% else %}
             no posts.
         {% endif %}
+    
+           
 
-{%endblock%}
+{% endblock %}

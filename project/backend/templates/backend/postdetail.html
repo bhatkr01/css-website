@@ -1,0 +1,10 @@
+
+{%extends 'backend/base.html' %}
+
+{% block title %}Post detail {%endblock%}
+
+{% block content %}
+<li>{{post.author_id.first_name}}--{{post.post_title}}--{{post.post_content}}--{{post.pub_date}}</li>
+<li><a href="{% url 'backend:editpost' post.id %}">Edit</a>
+<li> <a href="{% url 'backend:deletepost' post.id %}">Delete</a></li>    
+{%endblock%}

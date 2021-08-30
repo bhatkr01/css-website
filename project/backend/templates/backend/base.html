@@ -1,48 +1,69 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>{% block title %}{% endblock %}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'backend/style.css' %}">
 </head>
-<body>
-    <a class="navbar-brand" href="{%url 'backend:index' %}">LUTHER CSS</a>
-    <ul class="nav navbar-nav">
-        <li><a href="{%url 'backend:index' %}">Home</a></li>
-        <li><a href="{%url 'backend:about' %}">About</a></li>
-        <li><a href="{%url 'backend:roster' %}">Roster</a></li>
-        {% if user.is_authenticated %}
-        <li><a href="{%url 'backend:event_calendar' %}">Event Calendar</a></li>
-        {% endif %}
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        {% if user.is_admin %}
-        <li><a href="{%url 'backend:createpost' %}">New Post</a></li>
-        {% endif %}
-        {% if not user.is_authenticated %}
-        <li><a href="{% url 'accounts:sign_up' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="{%url 'accounts:log_in' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        {% endif %}
-        {% if user.is_authenticated %}
-        <li><a href="{%url 'accounts:profile' %}"><span class="glyphicon glyphicon-user"></span></a></li>
-        <li><a href="{%url 'accounts:log_out' %}">Logout</a></li>
-        {% endif %}
-    </ul>
+<body class="d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{%url 'backend:index' %}">LUTHER CSS</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{%url 'backend:index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{%url 'backend:about' %}">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="{%url 'backend:roster' %}">Roster</a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link active" href="{%url 'backend:event_calendar' %}">Event Calendar</a>
+            </li>
+          {% endif %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_admin %}
+          <li class="nav-item"><a class="nav-link active" href="{%url 'backend:createpost' %}">New Post</a></li>
+          {% endif %}
+          {% if not user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link active" href="{% url 'accounts:sign_up' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li class="nav-item"><a class="nav-link active" href="{%url 'accounts:log_in' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          {% endif %}
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link active" href="{%url 'accounts:profile' %}">Profile</a></li>
+          <li class="nav-item"><a class="nav-link active" href="{%url 'accounts:log_out' %}">Logout</a></li>
+          {% endif %}
+      </ul>
 
-    <div class="post_container overflow-auto">
 
+      </div>
+    </div>
+    </nav>
+    <div class="postcontainer overflow-auto">
         {%block content %}
         {% endblock %}
     </div>
 
-  <footer id="footer">
+  <footer id="footer" class="mt-auto">
 
         © 2020 Copyright:Luther CSS
 
   
   </footer>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 </html>
 
