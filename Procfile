@@ -1,1 +1,1 @@
-web: gunicorn css_website.wsgi
+web: gunicorn --pythonpath PROJECT css_website.wsgi
