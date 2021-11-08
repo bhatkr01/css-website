@@ -1,0 +1,30 @@
+{%extends 'backend/base.html' %}
+
+{% block content %}
+
+
+
+
+        {% if posts %}
+            {% for post in posts %}
+
+
+            <div class="card">
+                <div class="card-header">
+                    <h2><a href="{% url 'backend:postdetail' post.id %}">{{post.post_title}}</a></h2>
+                    <p class="card-title"><i class="fa fa-user"></i> by <a href="{%url 'accounts:profile' %}">{{post.author_id.first_name}}</a>
+                        <i class="fa fa-calendar"></i> Posted on {{post.pub_date}} </p>
+                </div>
+                <div class="card-body">
+                  
+                  <p class="card-text">{{post.post_content}}</p>
+                </div>
+              </div>
+            {% endfor %}
+
+
+        {% else %}
+            no posts.
+        {% endif %}
+
+{%endblock%}

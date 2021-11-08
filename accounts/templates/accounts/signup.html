@@ -1,0 +1,9 @@
+{%extends 'backend/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form action="{% url 'accounts:sign_up' %}" method="POST">
+      {% csrf_token %}
+        {% crispy form %}
+    </form>
+{%endblock%}
