@@ -1,9 +1,0 @@
-{%extends 'backend/base.html' %}
-
-{% block title %}Event detail {%endblock%}
-
-{% block content %}
-<li>{{event.event_title}}--{{event.event_description}}--{{event.start_time}}--{{event.end_time}}</li>
-<li><a href="{% url 'backend:editevent' event.id %}">Edit</a>
-<li> <a href="{% url 'backend:deleteevent' event.id %}">Delete</a></li>    
-{%endblock%}
